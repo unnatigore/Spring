@@ -1,0 +1,12 @@
+<body>
+<h1>${message}</h1>
+ action="displayImage" method="get">
+
+URI Movie: <input type="button" value="Vytvor" onclick="show_image()" > 
+	
+	
+
+
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+package com.cg.bookmymovie.theatreService.service;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cg.bookmymovie.movie.movie.entity.Movie;
+import com.cg.bookmymovie.theatreService.entity.Theatre;
+import com.cg.bookmymovie.theatreService.repository.TheatreRepository;
+
+@Service
+public class TheatreServiceImpl implements TheatreService {
+
+	@Autowired
+	private TheatreRepository theatreRepository;
+
+	public void addNewTheatre(Theatre theatre) {
+		theatreRepository.save(theatre);
+	}
+
+	public List<Theatre> getAllTheatres() {
+		return theatreRepository.findAll();
+	}
+
+	public void updateTheatre(Theatre theatre) {
+		theatreRepository.save(theatre);
+
+	}
+
+	public void deleteTheatre(Theatre theatre) {
+		theatreRepository.delete(theatre);
+
+	}
+
+	@Override
+	public void updateTheatre( String theatreName) {
+		Theatre theatre	= theatreRepository.findTheatreByTheatreName(theatreName).get();
+		theatre.setTheatreName(theatreName);
+		theatreRepository.save(theatre);
+	}
+	
+	@Override
+	public Optional<Theatre> findTheatreByName(String theatreName) {
+		Optional<Theatre> theatre = theatreRepository.findTheatreByTheatreName(theatreName);
+		if (!theatre.isPresent()) {
+			return null;
+		}
+		return theatreRepository.findTheatreByTheatreName(theatreName);
+		
+	}
+
+}

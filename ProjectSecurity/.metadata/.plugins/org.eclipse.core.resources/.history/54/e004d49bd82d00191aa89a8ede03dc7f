@@ -1,0 +1,25 @@
+package com.cg.bookmymovie.theatreService.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.cg.bookmymovie.theatreService.entity.Theatre;
+
+@Service
+public interface TheatreService {
+
+	void addNewTheatre(Theatre theatre);
+
+	List<Theatre> getAllTheatres();
+
+	void deleteTheatre(List<Theatre> list);
+
+	void updateTheatre(String theatreName);
+
+	Optional<Theatre> findTheatreByName(String theatreName);
+
+	
+
+}

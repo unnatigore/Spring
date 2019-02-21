@@ -1,0 +1,12 @@
+<body>
+<h1>${message}</h1>
+ 
+
+URI Movie:<img alt="Image" src="/image/src/main/webapp/WEB-INF/jsp/URI.jsp" width="160" height="160"    />
+	
+	
+
+
+
+</body>
+</html>

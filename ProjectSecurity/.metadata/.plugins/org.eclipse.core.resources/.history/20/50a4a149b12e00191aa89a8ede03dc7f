@@ -1,0 +1,12 @@
+<body>
+<h1>${message}</h1>
+ action="displayImage" method="get">
+
+URI Movie:<img alt="URI Movie" src="URI.png" />
+	
+	
+
+
+
+</body>
+</html>

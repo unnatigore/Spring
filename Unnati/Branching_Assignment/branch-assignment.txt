@@ -1,0 +1,35 @@
+git init
+git add .
+git config --global user.email=""
+git status
+git log
+git remote add origin https
+git commit -m "Adds"
+git push origin master
+ls -la
+git log help
+git log -1
+git log -- author= ""
+git log -- since= ""
+git log -- until= ""
+git log --grep - "Adds"
+git commit - a - m "Adds"
+cd .git
+cat HEAD
+cd refs
+cd master
+cd ..
+git branch
+git clone
+git remove-v
+git -b branch_name
+git -d branch_name
+git checkout git merge master branch1
+git diff master branch1
+git branch __ merged master
+git clean -n 
+git clean -f
+git reset- soft 534785675
+git reset - mixed 654675475
+git reset - hard 34534667
+cd .git/refs/head

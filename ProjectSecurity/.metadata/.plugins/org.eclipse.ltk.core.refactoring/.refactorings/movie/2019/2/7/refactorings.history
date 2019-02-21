@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move package &apos;com.cg.bookmymovie.movie.movie.service&apos; to &apos;movie/src/main/resources&apos;&#x0D;&#x0A;- Original project: &apos;movie&apos;&#x0D;&#x0A;- Destination element: &apos;movie/src/main/resources&apos;&#x0D;&#x0A;- Original element: &apos;movie/src/main/java/com.cg.bookmymovie.movie.movie.service&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move package" destination="/src\/main\/resources" element1="/src\/main\/java&lt;com.cg.bookmymovie.movie.movie.service" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1549886997501" version="1.0"/>
+</session>

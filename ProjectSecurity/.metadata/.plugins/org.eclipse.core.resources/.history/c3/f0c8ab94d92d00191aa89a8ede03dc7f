@@ -1,0 +1,77 @@
+package com.cg.bookmymovie.theatreService.resource;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import com.cg.bookmymovie.theatreService.entity.Theatre;
+import com.cg.bookmymovie.theatreService.service.TheatreService;
+
+@RestController // ("/u")//
+@RequestMapping("/theatres")
+public class TheatreResource {
+
+	@Autowired
+	private TheatreService theatreService;
+
+	@PostMapping
+	public void addMovies(@RequestBody Theatre theatre) {
+		theatreService.addNewTheatre(theatre);
+	}
+
+	@GetMapping
+	public ResponseEntity<List<Theatre>> getALLTheatre() {
+		List<Theatre> theatres = theatreService.getAllTheatres();
+		return new ResponseEntity<>(theatres, HttpStatus.OK);
+	}
+
+	@GetMapping("/{theatreName}")
+	public ResponseEntity<Optional<Theatre>> getTheatreByName(@PathVariable String theatreName) {
+		Theatre theatre = theatreService.findTheatreByName(theatreName);
+
+		if (!theatre.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<>(theatre, HttpStatus.OK);
+	}
+
+	@PutMapping("/{theatreName}")
+	public ResponseEntity<Theatre> updateTheatre(@PathVariable String theatreName) {
+
+		Optional<Theatre> theatre = theatreService.findTheatreByName(theatreName);
+		if (!theatre.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		theatreService.updateTheatre(theatreName);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@DeleteMapping("/{theatreName}")
+	public ResponseEntity<String> deleteTheatre(@PathVariable String theatreName) {
+
+		Optional<Theatre> theatre = theatreService.findTheatreByName(theatreName);
+		if (!theatre.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		theatreService.deleteTheatre(theatre.get());
+		return new ResponseEntity<>("Theatre Deleted SuccessFully", HttpStatus.OK);
+	}
+
+}

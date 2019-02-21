@@ -1,0 +1,122 @@
+
+package com.cg.bookmymovie.theatreService.service;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.cg.bookmymovie.theatreService.entity.Address;
+import com.cg.bookmymovie.theatreService.entity.Auditorium;
+import com.cg.bookmymovie.theatreService.entity.Seat;
+import com.cg.bookmymovie.theatreService.entity.Theatre;
+
+@RunWith(SpringRunner.class)
+
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+public class TheatreServiceImplIntegrationTest {
+
+	@Autowired(required = true)
+	private TheatreService theatreService;
+
+	Theatre theatre, theatre2;
+
+	@Before
+	public void addTheatreFailedTest() {
+
+		Set<Seat> seatSet = new HashSet<Seat>();
+
+		Set<Auditorium> auditoriumSet = new HashSet<Auditorium>();
+
+		seatSet.add(new Seat("Gold", "F", 15));
+		seatSet.add(new Seat("Platinum","P", 65));
+		auditoriumSet.add(new Auditorium("alpha", seatSet));
+		auditoriumSet.add(new Auditorium("beta", seatSet));
+
+		Address address = new Address("Maharashtra", "Mumbai", "Thane");
+
+		Address address2 = new Address("Rajasthan", "Kota", "Nayapura");
+
+		theatre = new Theatre(1, "HyperCinema", address, auditoriumSet);
+		theatre2 = new Theatre(2, "HyperCinema", address2, auditoriumSet);
+
+	}
+
+	@Test
+	// @Ignore
+	public void testGetTheatreByWrongName() {
+		assertEquals(null, theatreService.findTheatreByName("Wave Mall"));
+	}
+
+	@Test
+	@Ignore
+	public void testGetTheatreByCorrectName() {
+		assertEquals(theatre.getTheatreName(), theatreService.findTheatreByName("E-SQUARE").get().getTheatreName());
+	}
+
+	@Test
+	public void addNewTheatres() {
+		theatreService.addNewTheatre(theatre2);
+		System.out.println("Hello");
+		System.out.println( "Entering "+theatreService.findTheatreByName("Kota").get().getTheatreAddress().getCity());
+		assertEquals("Kota", theatreService.findTheatreByName("Kota").get().getTheatreAddress().getCity());
+		//assertEquals("HyperCinema", theatreService.findTheatreByName("HyperCinema").get().getTheatreName());
+	}
+
+	/*
+	 * @Test
+	 * 
+	 * @Ignore public void testDeleteTheatreByCorrectName() {
+	 * theatreService.deleteTheatre(theatre); assertEquals(null,
+	 * theatreService.findTheatreByName("E-SQUARE")); }
+	 * 
+	 * @Test
+	 * 
+	 * @Ignore public void testDeleteTheatreByWrongName() {
+	 * theatreService.deleteTheatre(theatre); assertEquals(null,
+	 * theatreService.findTheatreByName("mangala")); }
+	 * 
+	 * @Test
+	 * 
+	 * @Ignore public void testgetAllTheatreQuantity() { assertEquals(2,
+	 * theatreService.getAllTheatres().size()); }
+	 * 
+	 * *
+	 * 
+	 * @Test public void testGetMoviesByWrongMovieName() { assertEquals(null,
+	 * movieService.findMovieByName("Rocky")); }
+	 * 
+	 * @Test public void testGetMoviesByRightMovieName() {
+	 * assertEquals(movieService.findMovieByName("BAJIGAR").get().getMovieName(),
+	 * movie2.getMovieName()); }
+	 * 
+	 * @Test // @Ignore public void testgetAllMoviesSize() { assertEquals(1,
+	 * movieService.getAllMovie().size()); }
+	 * 
+	 * @Test public void testAddNewMovies() { movieService.addNewMovie(movie2);
+	 * assertEquals("Hema",
+	 * movieService.findMovieByName("BAJIGAR").get().getDirector()); }
+	 * 
+	 * @Test
+	 * 
+	 * @Ignore public void testDeleteMovies() { movieService.deleteMovies(movie3);
+	 * assertEquals(null, movieService.findMovieByName("2.0")); }
+	 * 
+	 * @Test
+	 * 
+	 * @Ignore public void testUpdateMoviesServices() { LocalDate releaseDate =
+	 * LocalDate.of(2019, Month.MARCH, 25); movie3.setReleaseDate(releaseDate);
+	 * movieService.addNewMovie(movie3); assertEquals(releaseDate,
+	 * movieService.findMovieByName("2.0").get().getReleaseDate()); }
+	 */
+
+}
